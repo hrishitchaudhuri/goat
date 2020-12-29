@@ -7,12 +7,24 @@ const axios=require('axios');
 
 var argv=require('yargs').argv;
 
+var cnt = 0;
+for (let e in argv) {
+    cnt++;
+}
+
+if (cnt == 2) {
+    const errMsg = chalk.red.bold("[ERR] Please enter a valid argument.")
+    console.log(errMsg);
+    process.exit(1);
+}
+
 const boxenOptions = {
     padding: 1,
     margin: 1,
     borderStyle: "round",
     borderColor: "green",
-    backgroundColor: "#555555"
+    align: "center",
+    backgroundColor: "green"
 };
 
 /*
@@ -24,13 +36,15 @@ const srchOptions = yargs
 
 let url = 'http://localhost:8000/mapi/'
 
-if (argv.gt) {
+
+// Obtain: Searches for data by title.
+if (argv.obtain) {
     url += `search/?TITLE=${escape(argv.gt)}`;
 
     axios.get(url, { headers: { Accept: "application/json" }})
         .then(res => {
             if (res.data.length) {
-                listString = '';
+                let listString = '';
 
                 for (let i=0; i < res.data.length; i++) {
                     for (let j=0; j < res.data[i].ITEMS.length; j++) {
@@ -45,8 +59,44 @@ if (argv.gt) {
 
             else {
                 const errMsg = chalk.red.bold(">> [ERR] No tasks found with matching title. <<");
-                const msgBox = boxen(errMsg, boxenOptions);
-                console.log(msgBox);
+                console.log(errMsg);
             }
         });
+}
+
+// Recite: Lists all available notes. 
+if (argv.recite) {
+    url += 'all';
+
+    axios.get(url, { headers: { Accept: "application/json" }})
+        .then(res => {
+            for (let i=0; i < res.data.length; i++) {
+                let titleString = res.data[i].NOTE_ID + '. TITLE: ' + res.data[i].TITLE + '\n\n';
+
+                let listString = '';
+                for (let j=0; j < res.data[i].ITEMS.length; j++) {
+                    listString += '>> ' + res.data[i].ITEMS[j] + '\n';
+                }
+
+                const titleMsg = chalk.black.underline.bold.bgWhite(titleString);
+                const successMsg = chalk.white.italic.dim(listString);
+                const msgBox = boxen(titleMsg + successMsg, boxenOptions);
+                console.log(msgBox);
+            }
+
+            if (!res.data) {
+                const errMsg = chalk.red.bold(">> [ERR] No tasks have been stored yet. <<")
+                console.log(errMsg);
+            }
+        });
+}
+
+// Concoct: Creates a new note with a new note ID. 
+if (argv.concoct) {
+
+}
+
+// Obliterate: Clear notes by ID.
+if (argv.obliterate) {
+    
 }
