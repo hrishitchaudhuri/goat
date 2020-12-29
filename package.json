@@ -1,0 +1,28 @@
+{
+  "name": "goat",
+  "version": "1.0.0",
+  "description": "a CLI tool for using mmaps",
+  "main": "bin",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrishitchaudhuri/goat.git"
+  },
+  "author": "hrishit chaudhuri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hrishitchaudhuri/goat/issues"
+  },
+  "homepage": "https://github.com/hrishitchaudhuri/goat#readme",
+  "bin": {
+    "goat": "./bin/index.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "boxen": "^4.0.0",
+    "chalk": "^2.4.2",
+    "yargs": "^13.2.4"
+  }
+}
