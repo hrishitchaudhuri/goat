@@ -91,12 +91,44 @@ if (argv.recite) {
         });
 }
 
-// Concoct: Creates a new note with a new note ID. 
-if (argv.concoct) {
+// Concoct: Creates a new note with a new note ID. Also requires the -t and -m flags to set title and message. 
+if (argv.concoct && argv.t && argv.m) {
+    var stats_url = url + 'stats';
+
+    axios.get(stats_url)
+        .then(res => {
+            var note_id = res.data.count;
+            var note_items = [];
+
+            note_items.push(argv.m);
+
+            var note = {
+                NOTE_ID: note_id,
+                ITEMS: note_items,
+                TITLE: argv.t
+            }
+
+            axios.post(url, note);
+        });
 
 }
 
 // Obliterate: Clear notes by ID.
 if (argv.obliterate) {
-    
+
+}
+
+// Affix: Add tasks to notes by ID.
+if (argv.affix) {
+
+}
+
+// Decimate: Delete all notes by title.
+if (argv.decimate) {
+
+}
+
+// Pulverize: Clear all notes (restart session).
+if (argv.pulverize) {
+
 }
