@@ -1,36 +1,37 @@
 # goat
 
 goat presently offers five major methods, to be used in conjunction with the project over at [mmaps](https://github.com/hrishitchaudhuri/mmaps). 
-
-### 1. Obtain
+<br/>
+<br/>
+#### obtain
 ```
 $ goat --obtain="Monday"
 ```
 Obtain lists all tasks that are grouped by a common title. It takes a searchable title as an argument. 
 <br/>
 <br/>
-### 2. Recite
+#### recite
 ```
 $ goat --recite
 ```
 Recite lists out all tasks presently stored in the database.
 <br/>
 <br/>
-### 3. Forge 
+#### forge 
 ```
 $ goat --forge -t "Thursday" -m "Debate Club"
 ```
 Forge takes a title and a task as arguments and creates a new note in the database. 
 <br/>
 <br/>
-### 4. Affix
+#### affix
 ```
 $ goat --affix=3 -m "Programming with C++"
 ```
 Affix takes a task and a note ID as arguments, and adds the task to the given note. 
 <br/>
 <br/>
-### 5. Obliterate
+#### obliterate
 ```
 $ goat --oblit=3
 ```
